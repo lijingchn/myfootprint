@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'intro',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -55,7 +56,8 @@ ROOT_URLCONF = 'myfootprint.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/intro/'),
+            os.path.join(BASE_DIR, 'templates/footprint_template/'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +78,12 @@ WSGI_APPLICATION = 'myfootprint.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'footprint',
+        'USER': 'ljj',
+        'PASSWORD': '123456',
+        'HOST':'localhost',
+        'PORT': '3306',
     }
 }
 

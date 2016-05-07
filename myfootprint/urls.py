@@ -19,3 +19,14 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+from django.conf.urls import url, patterns, include
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+        url(r'^admin/', include(admin.site.urls)),
+        url(r'^$', 'myfootprint.views.first_page'),
+        url(r'^intro/', include('intro.urls')),
+        )
+
