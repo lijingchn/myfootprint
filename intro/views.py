@@ -18,7 +18,13 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 def first_page(request):
-    return HttpResponse("<p>西餐</p>")
+    return render(request, 'form.html')
+
+def introduction_template(request):
+    context = {}
+    context['label'] = "The footprint app can let you to show you footprint on the map, it's very interesting ~"
+    return render(request, 'introduction.html', context)
+
 
 # ------------------------get coordinate code-------------------------------------------------------------
 class FootPrint():
@@ -69,17 +75,12 @@ class FootPrint():
 
 # ------------------------get coordinate code-------------------------------------------------------------
 
-def introduction_template(request):
-    context = {}
-    context['label'] = "The footprint app can let you to show you footprint on the map, it's very interesting ~"
-    return render(request, 'introduction.html', context)
 
 def form(request):
     return render(request, 'form.html')
 
 def handle_form(request):
     request.encoding='utf-8'
-#    foot = ['郑州 南阳']
     foot = []
 
     data = request.GET['title']
@@ -91,7 +92,6 @@ def handle_form(request):
     context['label_1'] = "上海"
     context['region'] = "china"
     context['alldata'] = json.dumps(F.alldata)
-    print context['alldata']
     context['linedata'] = json.dumps(F.linedata)
     context['pointdata'] = json.dumps(F.pointdata)
     return render(request, 'footprint.html', context)

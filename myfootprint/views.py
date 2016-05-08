@@ -4,5 +4,5 @@
 from django.http import HttpResponse
 
 def first_page(request):
-     return HttpResponse('<p>hello world!</p>p>')
+    return render(request, 'form.html')
 
