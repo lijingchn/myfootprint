@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<p class="text" style=" text-align:center;">去过的地方：陕西西安，武汉，苏州，郑州</p>
+<p class="text" style=" text-align:center;">想去的地方：上海</p>
+<p class="text" style=" text-align:center;"></p>
+
+<head>
+    <meta charset="utf-8">
+    <title>Love life, love travel</title>
+</head>
+<body>
+    <div id="main" style="height:800px;width:1300px;margin:20px auto;"></div>
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            backgroundColor: '#1b1b1b',
+            color: ['gold', 'aqua', 'lime'],
+            title: {
+                text: '爱生活，爱旅行',
+                subtext: '行走的吃货～～',
+                x: 'center',
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}'
+            },
+            dataRange: {
+                show:false,
+                min : 0,
+                max : 100,
+                calculable : true,
+                color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            series: [{
+                name: '全国',
+                type: 'map',
+                roam: true,
+                hoverable: false,
+                mapType: '{{ region }}',
+                itemStyle: {
+                    normal: {
+                        borderColor: 'rgba(100,149,237,1)',
+                        borderWidth: 0.5,
+                        areaStyle: {
+                            color: '#1b1b1b'
+                        }
+                    }
+                },
+                data: [],
+                      geoCoord: {{ alldata|safe }}
+            }, {
+                name: '足迹',
+                type: 'map',
+                mapType: '{{ region }}',
+                data: [],
+                markLine: {
+                    smooth: true,
+                    effect: {
+                        show: true,
+                        scaleSize: 1,
+                        period: 30,
+                        color: '#fff',
+                        shadowBlur: 10
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            lineStyle: {
+                                type: 'solid',
+                                shadowBlur: 10
+                            },
+                            label:{
+                                show:false
+                            },
+                        }
+                    },
+data: {{ linedata|safe }}
+                },
+                markPoint: {
+                    symbol: 'emptyCircle',
+                    symbolSize: function(v) {
+                        return 10 + v / 10
+                    },
+                    effect: {
+                        show: true,
+                        shadowBlur: 0
+                    },
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: false
+                            }
+                        },
+                        emphasis: {
+                            label: {
+                                position: 'top'
+                            }
+                        }
+                    },
+data: {{ pointdata|safe }}
+                }
+            }]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
